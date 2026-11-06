@@ -1,0 +1,50 @@
+{
+  "run_id": 42207875165,
+  "source_sha": "0a40f8dc8f69df03f07cc80ac566648af2e581c8",
+  "project_ref": "gwyprhenabtpkbojephw",
+  "profile": "expand7",
+  "status": "applied_and_read_back",
+  "preview_sql_sha256": "c1f993d4f08e3f8285cc792610678c43e981e2034b768ebc5e13bf0c77b398b1",
+  "artifact_zip_sha256": "3e4c5dcfce9bbc7dcf892d8438c941ccacfbce436beee493930355f8bc416beb",
+  "added": {
+    "people": 7,
+    "person_contacts": 7,
+    "student_relationships": 7,
+    "subscriber_numbers": 7
+  },
+  "verification": {
+    "verified_at": "2026-11-06 11:09:15.788752+00",
+    "active_demo_people": 10,
+    "starter_visible_people": 10,
+    "student_relationships": 10,
+    "subscriber_numbers": 10
+  },
+  "transaction_checks": [
+    "active Starter1 organization locked and center validated",
+    "Starter plan unchanged",
+    "new IDs absent before insertion",
+    "exactly seven rows added per table",
+    "seven subscriber numbers and Starter selections",
+    "no additional organization outbox jobs",
+    "deferred constraints checked"
+  ],
+  "application_ui_acceptance": {
+    "status": "blocked",
+    "page": "Students",
+    "scope": "Starter1 / Starter1 Merkez",
+    "observed": "İşlem tamamlanamadı. Yeniden dene veya destekle iletişime geç.",
+    "attempts": [
+      "initial list",
+      "reload",
+      "Demo search"
+    ],
+    "note": "List failure observed before and after expansion. Root cause unconfirmed. No application code changes."
+  },
+  "existing_rows_deleted": 0,
+  "checks": {
+    "unit_tests": 8,
+    "check_workflow_run": 42207815905,
+    "check_conclusion": "success",
+    "preview_conclusion": "success"
+  }
+}

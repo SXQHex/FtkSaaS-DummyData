@@ -1,0 +1,253 @@
+{
+  "mode": "dryRun",
+  "profile": "expand7",
+  "database_written": false,
+  "schema_sha256": "6ebd897e159c706a2cd30307888c5b0b91f56c27a7bfbb84845dc4881ed54f4d",
+  "sql_sha256": "c1f993d4f08e3f8285cc792610678c43e981e2034b768ebc5e13bf0c77b398b1",
+  "rows": {
+    "people": [
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-8fc982e87ba0",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Selin Arslan",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-93486d382712",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Emre Şahin",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-979dfe241e5a",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Derya Aydın",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-9ab33cd1e41c",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Mert Çelik",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-9fefe0cdfdb6",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo İpek Koç",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-a062891e8881",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Bora Aksoy",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-a462f1d51680",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Zeynep Yıldız",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      }
+    ],
+    "person_contacts": [
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-a985d20a3370",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-8fc982e87ba0",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-8fc982e87ba0-0@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-ad62217920f5",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-93486d382712",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-93486d382712-1@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-b16b50c61969",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-979dfe241e5a",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-979dfe241e5a-2@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-b4eaff52debb",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-9ab33cd1e41c",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-9ab33cd1e41c-3@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-baa78515e5a4",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-9fefe0cdfdb6",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-9fefe0cdfdb6-4@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-bea38f933531",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-a062891e8881",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-a062891e8881-5@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-c23771d97c23",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b08b-18b7-7668-a2b6-a462f1d51680",
+        "kind": "email",
+        "value": "snaplet-01a1b08b-18b7-7668-a2b6-a462f1d51680-6@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      }
+    ],
+    "center_relationships": [
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-c61e15dbe30f",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-8fc982e87ba0",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-c990843da3f7",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-93486d382712",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-cd4ee3862585",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-979dfe241e5a",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-d0f1b8c5d255",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-9ab33cd1e41c",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-d7f2d9e7773a",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-9fefe0cdfdb6",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-d91e44dc0f09",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-a062891e8881",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b08b-18b7-7668-a2b6-dddd8df13153",
+        "created_at": "2026-11-06T11:07:48.279Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b08b-18b7-7668-a2b6-a462f1d51680",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T11:07:48.279Z",
+        "ended_at": null
+      }
+    ]
+  }
+}

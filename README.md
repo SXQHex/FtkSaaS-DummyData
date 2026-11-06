@@ -35,4 +35,11 @@ Kontrol ayrıca bilinen Supabase pooler'ına kimlik bilgisi/SQL göndermeyen iki
 
 ## Durum
 
-İlk hosted pilot yüklendi ve bağımsız SQL okumasıyla doğrulandı. Üretilen SQL, sentetik kayıt manifesti ve yükleme/kabul sınırları [pilot kaydında](runs/pilot-42205635117/receipt.json) tutulur. Önizleme workflow'u salt okunur kalır; otomatik veri yüklemez. Uygulama ekranından kabul henüz yapılmadı.
+İlk üç öğrenciye yedi farklı öğrenci eklendi. Starter1 / Starter1 Merkez kapsamında toplam **10 demo öğrenci**, 10 aktif öğrenci ilişkisi ve 10 öğrenci numarası bağımsız SQL okumasıyla doğrulandı. Tümü Starter kapsamına dahil.
+
+- [İlk pilot kaydı](runs/pilot-42205635117/receipt.json)
+- [Yedi öğrenci genişletme kaydı](runs/expansion-42207875165/receipt.json)
+
+SQL ve sentetik manifestler ilgili kayıt klasörlerindedir. Mevcut kayıt silinmedi, yeni outbox işi oluşmadı. Önizleme workflow'u salt okunur kalır; otomatik veri yüklemez.
+
+**Ekran kabulü tamamlanmadı:** Öğrenciler sayfası hem genişletme öncesinde hem sonrasında, yenileme ve Demo aramasında “İşlem tamamlanamadı” hatası verdi. Veritabanı kabulü geçti; ekran hatasının kök nedeni doğrulanmadı. Uygulama kodu değiştirilmedi.
