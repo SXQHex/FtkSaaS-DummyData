@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateConnection, buildPlan, projectModel } from './lib.mjs';
+import { validateConnection, buildPlan, projectModel, connectionFailure } from './lib.mjs';
 import { validate, version } from 'uuid';
 
 test('wrong project, HTTPS URL and transaction pooler are rejected', () => {
@@ -25,4 +25,15 @@ test('generation projection preserves scalars and does not auto-generate FK pare
   assert.deepEqual(Object.keys(projected.models), ['people','person_contacts','center_relationships']);
   for (const model of Object.values(projected.models)) assert.deepEqual(model.fields, [{name:'org_id',kind:'scalar',isRequired:true}]);
   assert.equal(raw.models.people.fields.length, 2);
+});
+test('connection diagnosis distinguishes auth/TLS without disclosing provider text or secrets', () => {
+  const sensitive = 'postgresql://user:DO_NOT_PRINT@private-host/database';
+  for (const code of ['28P01','SELF_SIGNED_CERT_IN_CHAIN','42501','unknown:'+sensitive]) {
+    const text = connectionFailure({code,message:sensitive,detail:sensitive}, 'connect');
+    assert.equal(text.includes(sensitive), false);
+    assert.equal(text.includes('DO_NOT_PRINT'), false);
+  }
+  assert.match(connectionFailure({code:'28P01'}, 'connect'), /DB_CONNECT_28P01/);
+  assert.match(connectionFailure({code:'SELF_SIGNED_CERT_IN_CHAIN'}, 'connect'), /TLS/);
+  assert.match(connectionFailure({code:'42501'}, 'schema'), /DB_SCHEMA_42501/);
 });

@@ -2,7 +2,7 @@ import pg from 'pg';
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { validateConnection, buildPlan, projectModel, tables } from './lib.mjs';
+import { validateConnection, buildPlan, projectModel, tables, connectionFailure } from './lib.mjs';
 
 async function main() {
   const testing = process.env.SNAPLET_LOCAL_TEST === '1';
@@ -10,8 +10,10 @@ async function main() {
   process.env.SNAPLET_DATABASE_URL = connectionString;
   const client = new pg.Client({ connectionString, ssl: testing ? false : { rejectUnauthorized: true }, connectionTimeoutMillis: 10000 });
   let plan, schemaHash;
+  let stage = 'connect';
   try {
     await client.connect();
+    stage = 'schema';
     await client.query('BEGIN READ ONLY');
     await client.query("SET LOCAL statement_timeout='15s'");
     const target = await client.query(`select o.id as org_id,c.id as center_id from core.organizations o join core.centers c on c.org_id=o.id where o.name='Starter1' and c.name='Starter1 Merkez' and o.state='active' and c.state='active'`);
@@ -32,7 +34,7 @@ async function main() {
   } catch (error) {
     // Do not forward pg errors, connection strings or existing row contents.
     if (error.message?.startsWith('Starter1') || error.message?.startsWith('Pilot') || error.message?.startsWith('Zorunlu')) throw error;
-    throw new Error('Veritabanı bağlantısı/şema kontrolü başarısız; bağlantı, TLS ve erişim ayarlarını kontrol et.');
+    throw new Error(connectionFailure(error, stage));
   } finally { await client.end().catch(() => {}); }
   mkdirSync('.snaplet', { recursive: true });
   mkdirSync('.work', { recursive: true });

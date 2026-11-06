@@ -3,6 +3,27 @@ import { v7 } from 'uuid';
 export const projectRef = 'gwyprhenabtpkbojephw';
 export const tables = ['people', 'person_contacts', 'center_relationships'];
 
+export function connectionFailure(error, stage) {
+  const messages = {
+    '28P01': 'Veritabanı parolası kabul edilmedi. Secret içindeki parolayı ve URI kodlamasını kontrol et.',
+    '28000': 'Veritabanı kullanıcısı veya kimlik doğrulama ayarı reddedildi.',
+    '42501': 'Bağlantı kuruldu; gerekli şema/tablo okuma yetkisi yok.',
+    '42P01': 'Bağlantı kuruldu; beklenen tablo bulunamadı.',
+    '42703': 'Bağlantı kuruldu; beklenen sütun bulunamadı.',
+    '53300': 'Veritabanı bağlantı limiti dolu.',
+    SELF_SIGNED_CERT_IN_CHAIN: 'TLS sertifika zinciri doğrulanamadı. Güvenilir CA yapılandırması gerekli.',
+    DEPTH_ZERO_SELF_SIGNED_CERT: 'TLS sertifikası güvenilir değil.',
+    UNABLE_TO_VERIFY_LEAF_SIGNATURE: 'TLS sertifikasını doğrulayacak CA bulunamadı.',
+    CERT_HAS_EXPIRED: 'TLS sertifikasının süresi dolmuş.',
+    ENOTFOUND: 'Veritabanı sunucusunun DNS adı çözülemedi.',
+    ECONNREFUSED: 'Veritabanı bağlantısı reddedildi.',
+    ETIMEDOUT: 'Veritabanı bağlantısı zaman aşımına uğradı.',
+    ECONNRESET: 'Veritabanı bağlantısı sunucu veya ağ tarafından kapatıldı.',
+  };
+  const code = Object.hasOwn(messages, error?.code) ? error.code : 'UNKNOWN';
+  return `DB_${stage.toUpperCase()}_${code}: ${messages[code] || 'Bağlantı veya şema okuması başarısız; ham hata güvenlik nedeniyle yayımlanmadı.'}`;
+}
+
 // This is an INSERT-only generation projection, not a replacement DB schema.
 // All IDs and FK columns are supplied explicitly; PostgreSQL retains its FKs.
 export function projectModel(raw) {
