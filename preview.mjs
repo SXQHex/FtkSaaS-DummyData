@@ -42,7 +42,10 @@ async function main() {
   writeFileSync('.work/plan.json', JSON.stringify(plan), { mode: 0o600 });
   const env = { ...process.env, OPENAI_API_KEY: '', GROQ_API_KEY: '', SNAPLET_SEED_CONFIG: `${process.cwd()}/seed.config.ts` };
   const sync = spawnSync('./node_modules/.bin/snaplet-seed', ['sync', '--output', '.generated'], { env, encoding: 'utf8', timeout: 120000, maxBuffer: 10 * 1024 * 1024 });
-  if (sync.status !== 0) throw new Error('Snaplet şema eşitlemesi başarısız; ham çıktı sır içerebileceği için yayımlanmadı.');
+  if (sync.status !== 0) {
+    if (testing) console.error(sync.stdout, sync.stderr);
+    throw new Error('Snaplet şema eşitlemesi başarısız; hosted ham çıktı yayımlanmadı.');
+  }
   const generated = spawnSync(process.execPath, ['seed-child.mjs'], { env, encoding: 'utf8', timeout: 60000, maxBuffer: 10 * 1024 * 1024 });
   if (generated.status !== 0 || !generated.stdout.includes('INSERT INTO')) throw new Error('Snaplet SQL üretimi başarısız; ham çıktı yayımlanmadı.');
   const sql = generated.stdout;
