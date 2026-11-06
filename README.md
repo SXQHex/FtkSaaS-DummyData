@@ -4,12 +4,11 @@ FtkSaaS uygulama reposundan bağımsız Snaplet çalışma alanı. Uygulama kodu
 
 ## İlk kurulum
 
-1. Bu repoyu **Private** yap: Settings → General → Danger Zone → Change repository visibility.
-2. Settings → Secrets and variables → Actions → New repository secret:
+1. Settings → Secrets and variables → Actions → New repository secret:
    - Name: `SNAPLET_DATABASE_URL`
    - Secret: Supabase **Connect → Session pooler → URI** bağlantısı. `[YOUR-PASSWORD]` yerine DB parolası doldurulur. Parolanın URI özel karakterleri percent-encode edilir. Port **5432** olmalı.
-3. Actions → **Snaplet SQL preview** → Run workflow → main.
-4. Başarılı koşunun `snaplet-preview-…` artifact'ını indir.
+2. Actions → **Snaplet SQL preview** → Run workflow → main.
+3. Başarılı koşunun `snaplet-preview-…` artifact'ını indir.
 
 Proje HTTPS URL'si ve publishable/service-role anahtarı PostgreSQL bağlantısı değildir. Secret oluşturmak DB parolasını sıfırlamayı gerektirmez. Mevcut parolayı bilmiyorsan sıfırlamanın diğer bağlantılara etkisini önce değerlendir.
 
@@ -30,8 +29,8 @@ Pilot finans, satış, rezervasyon, takvim, Auth hesabı ve davet gönderimi iç
 ## Doğrulama
 
 `npm ci --ignore-scripts`, `npm test`, `npm run check`.
-Push/main ve PR kontrolü izole loopback PostgreSQL servisinde Snaplet şema eşitleme → dryRun → üretilen SQL → rollback zincirini sınar. Basitleştirilmiş sentetik şema kullanır; gerçek FtkSaaS trigger/politika kabulü değildir. Bu kontrol hosted secret kullanmaz. DB önizlemesi yalnız elle başlatılır ve repo Private/secret varlığı zorunludur.
+Push/main ve PR kontrolü izole loopback PostgreSQL servisinde Snaplet şema eşitleme → dryRun → üretilen SQL → rollback zincirini sınar. Basitleştirilmiş sentetik şema kullanır; gerçek FtkSaaS trigger/politika kabulü değildir. Bu kontrol hosted secret kullanmaz. DB önizlemesi yalnız elle başlatılır ve secret varlığı zorunludur; public repo desteklenir.
 
 ## Durum
 
-Dosyalar ve yerel plan/bağlantı kontrolleri hazır. Hosted şema eşitleme/önizleme, bağlantı secret'ı ve Private repo koşulları sağlandıktan sonra çalıştırılabilir. Gerçek hedefe yazım yapılmadı.
+Dosyalar ve yerel plan/bağlantı kontrolleri hazır. Hosted şema eşitleme/önizleme, bağlantı secret'ı tanımlandıktan sonra çalıştırılabilir. Gerçek hedefe yazım yapılmadı.

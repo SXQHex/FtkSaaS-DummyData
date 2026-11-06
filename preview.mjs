@@ -6,7 +6,6 @@ import { validateConnection, buildPlan, projectModel, tables } from './lib.mjs';
 
 async function main() {
   const testing = process.env.SNAPLET_LOCAL_TEST === '1';
-  if (process.env.GITHUB_ACTIONS && !testing && process.env.REPO_PRIVATE !== 'true') throw new Error('Veritabanı önizlemesi için repo Private olmalı.');
   const connectionString = validateConnection(process.env.SNAPLET_DATABASE_URL, testing);
   process.env.SNAPLET_DATABASE_URL = connectionString;
   const client = new pg.Client({ connectionString, ssl: testing ? false : { rejectUnauthorized: true }, connectionTimeoutMillis: 10000 });
