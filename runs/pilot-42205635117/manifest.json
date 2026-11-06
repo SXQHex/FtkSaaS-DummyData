@@ -1,0 +1,116 @@
+{
+  "mode": "dryRun",
+  "database_written": false,
+  "schema_sha256": "6ebd897e159c706a2cd30307888c5b0b91f56c27a7bfbb84845dc4881ed54f4d",
+  "sql_sha256": "29f4dc2d50a30ec2abc576d5258aabeb3cdff288d392e2a455bb3569ee762939",
+  "rows": {
+    "people": [
+      {
+        "id": "01a1b07a-edda-76b6-8b10-778203ef2530",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Deniz Yılmaz",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b07a-edda-76b6-8b10-78dd044e8468",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Ece Demir",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      },
+      {
+        "id": "01a1b07a-edda-76b6-8b10-7fe9b45f40c7",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "display_name": "Demo Can Kaya",
+        "given_name": null,
+        "family_name": null,
+        "state": "active",
+        "merged_into_id": null
+      }
+    ],
+    "person_contacts": [
+      {
+        "id": "01a1b07a-edda-76b6-8b10-829471ae49a8",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b07a-edda-76b6-8b10-778203ef2530",
+        "kind": "email",
+        "value": "snaplet-01a1b07a-edda-76b6-8b10-778203ef2530-0@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b07a-edda-76b6-8b10-86dd655fc79d",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b07a-edda-76b6-8b10-78dd044e8468",
+        "kind": "email",
+        "value": "snaplet-01a1b07a-edda-76b6-8b10-78dd044e8468-1@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      },
+      {
+        "id": "01a1b07a-edda-76b6-8b10-8b1d22547c37",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "person_id": "01a1b07a-edda-76b6-8b10-7fe9b45f40c7",
+        "kind": "email",
+        "value": "snaplet-01a1b07a-edda-76b6-8b10-7fe9b45f40c7-2@example.invalid",
+        "verified_at": null,
+        "account_projection_retired": false
+      }
+    ],
+    "center_relationships": [
+      {
+        "id": "01a1b07a-edda-76b6-8b10-8dfc453a2fe2",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b07a-edda-76b6-8b10-778203ef2530",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T10:50:08.730Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b07a-edda-76b6-8b10-91ed1f2846cc",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b07a-edda-76b6-8b10-78dd044e8468",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T10:50:08.730Z",
+        "ended_at": null
+      },
+      {
+        "id": "01a1b07a-edda-76b6-8b10-95225b3da597",
+        "created_at": "2026-11-06T10:50:08.730Z",
+        "version": 1,
+        "org_id": "01a19b15-5f5a-7fd5-97ce-ab3c791068c1",
+        "center_id": "01a19b1c-8a10-77cf-aabd-f94932b9e2bb",
+        "person_id": "01a1b07a-edda-76b6-8b10-7fe9b45f40c7",
+        "kind": "student",
+        "state": "active",
+        "started_at": "2026-11-06T10:50:08.730Z",
+        "ended_at": null
+      }
+    ]
+  }
+}

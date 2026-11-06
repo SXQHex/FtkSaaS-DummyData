@@ -35,4 +35,4 @@ Kontrol ayrıca bilinen Supabase pooler'ına kimlik bilgisi/SQL göndermeyen iki
 
 ## Durum
 
-Dosyalar ve yerel plan/bağlantı kontrolleri hazır. Hosted şema eşitleme/önizleme, bağlantı secret'ı tanımlandıktan sonra çalıştırılabilir. Gerçek hedefe yazım yapılmadı.
+İlk hosted pilot yüklendi ve bağımsız SQL okumasıyla doğrulandı. Üretilen SQL, sentetik kayıt manifesti ve yükleme/kabul sınırları [pilot kaydında](runs/pilot-42205635117/receipt.json) tutulur. Önizleme workflow'u salt okunur kalır; otomatik veri yüklemez. Uygulama ekranından kabul henüz yapılmadı.

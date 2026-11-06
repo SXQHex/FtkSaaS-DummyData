@@ -1,0 +1,27 @@
+{
+  "run_id": 42205635117,
+  "source_sha": "90fb71f70360f18ad350be62090806a145a3debe",
+  "project_ref": "gwyprhenabtpkbojephw",
+  "status": "applied_and_read_back",
+  "preview_sql_sha256": "29f4dc2d50a30ec2abc576d5258aabeb3cdff288d392e2a455bb3569ee762939",
+  "verification": {
+    "verified_at": "2026-11-06 10:55:56.741221+00",
+    "active_people": 3,
+    "student_relationships": 3,
+    "registry_relationships": 3,
+    "starter_visible_people": 3,
+    "subscriber_numbers": 3,
+    "total_active_student_relationships": 6
+  },
+  "transaction_checks": [
+    "existing pilot IDs absent",
+    "active Starter1 organization and center locked and validated",
+    "exactly three rows added per pilot table",
+    "three subscriber numbers created",
+    "all three students in Starter scope",
+    "no new organization outbox jobs",
+    "all deferred constraints checked"
+  ],
+  "application_ui_acceptance": "not_run",
+  "existing_rows_deleted": 0
+}
