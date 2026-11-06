@@ -10,8 +10,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test lib.test.mjs",
+    "test": "node --test lib.test.mjs target420.test.mjs",
     "preview": "node preview.mjs",
-    "check": "node --check lib.mjs && node --check preview.mjs && node --check seed-child.mjs"
+    "check": "node --check lib.mjs && node --check preview.mjs && node --check seed-child.mjs && node --check target420.mjs"
   }
 }

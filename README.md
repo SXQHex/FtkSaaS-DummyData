@@ -35,11 +35,16 @@ Kontrol ayrıca bilinen Supabase pooler'ına kimlik bilgisi/SQL göndermeyen iki
 
 ## Durum
 
-İlk üç öğrenciye yedi farklı öğrenci eklendi. Starter1 / Starter1 Merkez kapsamında toplam **10 demo öğrenci**, 10 aktif öğrenci ilişkisi ve 10 öğrenci numarası bağımsız SQL okumasıyla doğrulandı. Tümü Starter kapsamına dahil.
+Kabul edilen veri dağılımı yüklendi: **1 Business (2 merkez), 2 Pro (birer merkez), 3 Starter (birer merkez)**. Her merkezde mevcut kayıtlar dahil **50 aktif + 10 inaktif öğrenci** var; toplam 350 aktif, 70 inaktif öğrencilik. [Son doğrulama ve temizlik kaydı](runs/target420-20261106/receipt.json).
 
-- [İlk pilot kaydı](runs/pilot-42205635117/receipt.json)
-- [Yedi öğrenci genişletme kaydı](runs/expansion-42207875165/receipt.json)
+Tüm 420 öğrencinin hesap bağlantısı ve öğrenci numarası doğrulandı. Yeni hesaplar doğal ad-soyadlardan üretilmiş ASCII Gmail aliasları kullanır. Parolalar kaynaklarda, artifact veya bu public repoda tutulmaz. Mevcut hesapların parolaları değiştirilmedi. Native Auth gerçek parola girişi ve yeni bir organizasyon sahibinin `account_get_v1` / `organizations_list_v1` çağrıları başarılı; genişletilmiş veri için uygulama ekranı kabulü ayrıca yapılmadı.
 
-SQL ve sentetik manifestler ilgili kayıt klasörlerindedir. Mevcut kayıt silinmedi, yeni outbox işi oluşmadı. Önizleme workflow'u salt okunur kalır; otomatik veri yüklemez.
+56 eski test kişisi ve bağlı 636 kayıt, kullanıcının tüm ilişkili test verilerini silme talebiyle temizlendi. Kişi/satış/borç/kredi/işlem/bildirim/önizleme bağlantıları tarandı. İki append-only koruması yalnız tek transaction içinde, tablolar kilitliyken bakım için geçici kapatıldı; transaction tamamlanmadan yeniden açıldı. Bağlı veriler önceden özel yedeklendi; public repoya kişisel envanter veya parola eklenmedi. Eşzamanlı Pro1 sahibi öğrenciliği korundu; bu çalışmada oluşturulan kullanılmamış bir demo hesabının 11 kaydı geri alındı. Son sayım tüm merkezlerde tam 50/10.
 
-**Ekran kabulü tamamlanmadı:** Öğrenciler sayfası hem genişletme öncesinde hem sonrasında, yenileme ve Demo aramasında “İşlem tamamlanamadı” hatası verdi. Veritabanı kabulü geçti; ekran hatasının kök nedeni doğrulanmadı. Uygulama kodu değiştirilmedi.
+## 420 öğrencilik çalışma aracı
+
+`target420.mjs`, bu görevin başlangıç envanteri için bağımsız bir uzlaştırma planlayıcısıdır. Uygulama deposuna veya CI'ına bağlı değildir; otomatik veri yüklemez. `.work/target420/before.json` ve `context.json` özel başlangıç snapshot'larıdır; `node target420.mjs` yalnız özel plan/SQL üretir. Kimlikler her üretimde yenilenir. Yükleme başladıktan sonra plan tekrar üretilmez; güncel DB envanteri ve bağlantılar yeniden incelenmeden tekrar çalıştırılmaz.
+
+Native e-posta Auth test hesapları `authSql` ile runtime'da sağlanan parola kullanılarak hazırlanır. Hesap/identity/profil/kişi/iletişim projeksiyonu birlikte kurulur. Var olan hesap veya alias görüldüğünde işlem durur; parola güncellemesi yoktur. Geniş kapsamlı son temizlik, bu planlayıcının otomatik bir özelliği değildir; bağımlılıkları incelenmiş, özel ve tam kimlik listeli tek seferlik bakım işlemi olarak uygulandı.
+
+İlk pilotların tarihsel kayıtları: [3 öğrenci](runs/pilot-42205635117/receipt.json), [7 öğrenci genişletme](runs/expansion-42207875165/receipt.json). Önizleme workflow'u salt okunur kalır.

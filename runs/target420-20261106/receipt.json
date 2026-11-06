@@ -1,0 +1,187 @@
+{
+  "status": "applied_and_verified",
+  "project_ref": "gwyprhenabtpkbojephw",
+  "target": {
+    "organizations": {
+      "business": 1,
+      "pro": 2,
+      "starter": 3
+    },
+    "centers": 7,
+    "active_per_center": 50,
+    "inactive_per_center": 10,
+    "active_total": 350,
+    "inactive_total": 70
+  },
+  "actual": {
+    "active": 350,
+    "inactive": 70,
+    "centers": [
+      {
+        "name": "Fethiye Tango Kulübü",
+        "plan": "business",
+        "center": "FTK",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      },
+      {
+        "name": "Fethiye Tango Kulübü",
+        "plan": "business",
+        "center": "Taşyaka",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      },
+      {
+        "name": "Pro1",
+        "plan": "pro",
+        "center": "Pro1 Merkez",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      },
+      {
+        "name": "Pro2",
+        "plan": "pro",
+        "center": "Pro2 Merkez",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      },
+      {
+        "name": "Starter1",
+        "plan": "starter",
+        "center": "Starter1 Merkez",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      },
+      {
+        "name": "Starter2",
+        "plan": "starter",
+        "center": "Starter2 Merkez",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      },
+      {
+        "name": "Starter3",
+        "plan": "starter",
+        "center": "Starter3 Merkez",
+        "active": 50,
+        "inactive": 10,
+        "invalid_dates": 0
+      }
+    ]
+  },
+  "verification": {
+    "verified_at": "2026-11-06 12:44:43.149452+00",
+    "new_auth_users": 420,
+    "confirmed_aliases": 420,
+    "native_email_identities": 420,
+    "linked_accounts": 420,
+    "native_password_login": true,
+    "owner_password_login": true,
+    "account_get_v1": true,
+    "organizations_list_v1": true,
+    "intended_members": {
+      "people": 420,
+      "unmerged_people": 420,
+      "linked_people": 420,
+      "numbered_people": 420
+    },
+    "unit_tests": 12,
+    "password_matches_remaining_verified_subset": 420,
+    "student_relationships": 420,
+    "linked_students": 420,
+    "numbered_students": 420
+  },
+  "preservation": {
+    "existing_passwords_changed": 0,
+    "shared_organizations_deleted": 0,
+    "shared_centers_deleted": 0,
+    "protections_restored": 2
+  },
+  "application_ui_acceptance": "not_run_for_expanded_dataset",
+  "cleanup": {
+    "obsolete_test_people": 56,
+    "related_records_including_people": 636,
+    "related_tables": 17,
+    "remaining_references": 0,
+    "withdrawn_unused_demo_person": 1,
+    "withdrawn_demo_records": 11,
+    "reason_for_withdrawal": "Concurrent Pro1 owner student activation retained; one unused seed account withdrawn to keep 50 active students.",
+    "rows_by_table": [
+      {
+        "table": "core.center_relationships",
+        "count": 56
+      },
+      {
+        "table": "core.debts",
+        "count": 1
+      },
+      {
+        "table": "core.entitlement_accounts",
+        "count": 1
+      },
+      {
+        "table": "core.entitlement_movements",
+        "count": 1
+      },
+      {
+        "table": "core.merge_requests",
+        "count": 3
+      },
+      {
+        "table": "core.sales",
+        "count": 1
+      },
+      {
+        "table": "private.person_origins",
+        "count": 56
+      },
+      {
+        "table": "private.subscriber_numbers",
+        "count": 53
+      },
+      {
+        "table": "core.audit_events",
+        "count": 57
+      },
+      {
+        "table": "core.notifications",
+        "count": 57
+      },
+      {
+        "table": "core.operation_receipts",
+        "count": 57
+      },
+      {
+        "table": "core.previews",
+        "count": 3
+      },
+      {
+        "table": "private.p06_contexts",
+        "count": 169
+      },
+      {
+        "table": "private.preview_payloads",
+        "count": 4
+      },
+      {
+        "table": "core.people",
+        "count": 56
+      },
+      {
+        "table": "core.outbox_jobs",
+        "count": 57
+      },
+      {
+        "table": "private.p05_jobs",
+        "count": 4
+      }
+    ],
+    "native_sessions_on_withdrawn_account": 0
+  }
+}
