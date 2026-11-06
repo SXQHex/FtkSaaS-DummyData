@@ -17,5 +17,8 @@ export default defineConfig({
     return new SeedPg(client);
   },
   alias: { inflection: false },
-  select: ['!*', 'core.people', 'core.person_contacts', 'core.center_relationships'],
+  // Snaplet requires the FK parents in its model, even when we only reference
+  // existing rows. Generation supplies all FK scalars; SQL validation rejects
+  // accidental parent INSERTs.
+  select: ['!*', 'core.organizations', 'core.centers', 'core.people', 'core.person_contacts', 'core.center_relationships'],
 });
