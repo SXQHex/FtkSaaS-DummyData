@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateConnection, buildPlan, projectModel, connectionFailure } from './lib.mjs';
+import { validateConnection, buildPlan, projectModel, connectionFailure, databaseTls } from './lib.mjs';
+import { X509Certificate } from 'node:crypto';
 import { validate, version } from 'uuid';
 
 test('wrong project, HTTPS URL and transaction pooler are rejected', () => {
@@ -36,4 +37,17 @@ test('connection diagnosis distinguishes auth/TLS without disclosing provider te
   assert.match(connectionFailure({code:'28P01'}, 'connect'), /DB_CONNECT_28P01/);
   assert.match(connectionFailure({code:'SELF_SIGNED_CERT_IN_CHAIN'}, 'connect'), /TLS/);
   assert.match(connectionFailure({code:'42501'}, 'schema'), /DB_SCHEMA_42501/);
+});
+test('hosted TLS trusts the official Supabase CA and keeps server verification enabled', () => {
+  const ssl = databaseTls();
+  assert.equal(ssl.rejectUnauthorized, true);
+  const cert = new X509Certificate(ssl.ca);
+  assert.equal(cert.ca, true);
+  assert.equal(cert.fingerprint256, '80:70:25:AD:50:D4:ED:21:9D:2C:9C:7D:29:9C:00:4F:82:4E:B0:0C:F7:F6:5A:FE:F6:07:D0:7B:72:E6:CA:FA');
+  assert.ok(Date.parse(cert.validTo) > Date.now());
+  assert.equal(ssl.checkServerIdentity, undefined); // Node's hostname verification remains active.
+});
+test('local test mode cannot disable hosted TLS', () => {
+  assert.throws(() => validateConnection('postgresql://postgres.gwyprhenabtpkbojephw:demo@aws-1-eu-central-1.pooler.supabase.com:5432/postgres', true));
+  assert.equal(validateConnection('postgresql://postgres@127.0.0.1:5432/test', true), 'postgresql://postgres@127.0.0.1:5432/test');
 });

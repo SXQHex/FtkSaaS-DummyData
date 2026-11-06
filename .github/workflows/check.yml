@@ -32,6 +32,8 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm test && npm run check
+      - name: Verify Supabase TLS without credentials
+        run: node tls-probe.mjs
       - name: Exercise Snaplet against disposable PostgreSQL
         run: node smoke.mjs
         env:

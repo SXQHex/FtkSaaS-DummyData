@@ -1,7 +1,16 @@
 import { v7 } from 'uuid';
+import { readFileSync } from 'node:fs';
 
 export const projectRef = 'gwyprhenabtpkbojephw';
 export const tables = ['people', 'person_contacts', 'center_relationships'];
+
+export function databaseTls(localTest = false) {
+  if (localTest) return false;
+  return {
+    ca: readFileSync(new URL('./certs/supabase-root.crt', import.meta.url), 'utf8'),
+    rejectUnauthorized: true,
+  };
+}
 
 export function connectionFailure(error, stage) {
   const messages = {
@@ -42,7 +51,10 @@ export function validateConnection(value, test = false) {
   let url;
   try { url = new URL(value); } catch { throw new Error('PostgreSQL URI geçersiz.'); }
   if (!['postgres:', 'postgresql:'].includes(url.protocol)) throw new Error('PostgreSQL URI gerekli; HTTPS proje adresi değil.');
-  if (test && ['127.0.0.1', 'localhost'].includes(url.hostname)) return value;
+  if (test) {
+    if (!['127.0.0.1', 'localhost'].includes(url.hostname)) throw new Error('Test modu yalnız loopback bağlantısını kabul eder.');
+    return value;
+  }
   const direct = url.hostname === `db.${projectRef}.supabase.co` && url.username === 'postgres';
   const pooled = url.hostname.endsWith('.pooler.supabase.com') && decodeURIComponent(url.username) === `postgres.${projectRef}`;
   if (!(direct || pooled) || (url.port && url.port !== '5432') || url.pathname !== '/postgres') throw new Error('Hedef proje veya session pooler portu eşleşmiyor.');

@@ -2,13 +2,13 @@ import pg from 'pg';
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { validateConnection, buildPlan, projectModel, tables, connectionFailure } from './lib.mjs';
+import { validateConnection, buildPlan, projectModel, tables, connectionFailure, databaseTls } from './lib.mjs';
 
 async function main() {
   const testing = process.env.SNAPLET_LOCAL_TEST === '1';
   const connectionString = validateConnection(process.env.SNAPLET_DATABASE_URL, testing);
   process.env.SNAPLET_DATABASE_URL = connectionString;
-  const client = new pg.Client({ connectionString, ssl: testing ? false : { rejectUnauthorized: true }, connectionTimeoutMillis: 10000 });
+  const client = new pg.Client({ connectionString, ssl: databaseTls(testing), connectionTimeoutMillis: 10000 });
   let plan, schemaHash;
   let stage = 'connect';
   try {

@@ -1,7 +1,7 @@
 import pg from 'pg';
 import { SeedPg } from '@snaplet/seed/adapter-pg';
 import { defineConfig } from '@snaplet/seed/config';
-import { validateConnection } from './lib.mjs';
+import { validateConnection, databaseTls } from './lib.mjs';
 
 export default defineConfig({
   adapter: async () => {
@@ -9,7 +9,7 @@ export default defineConfig({
     const connectionString = validateConnection(process.env.SNAPLET_DATABASE_URL, testing);
     const client = new pg.Client({
       connectionString,
-      ssl: testing ? false : { rejectUnauthorized: true },
+      ssl: databaseTls(testing),
       connectionTimeoutMillis: 10000,
       options: '-c default_transaction_read_only=on -c statement_timeout=15000',
     });
