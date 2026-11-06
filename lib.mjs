@@ -64,8 +64,13 @@ export function validateConnection(value, test = false) {
   return url.toString();
 }
 
-export function buildPlan(orgId, centerId, now = new Date().toISOString()) {
-  const people = ['Deniz Yılmaz', 'Ece Demir', 'Can Kaya'].map(display_name => ({
+export function buildPlan(orgId, centerId, now = new Date().toISOString(), profile = 'pilot3') {
+  const profiles = {
+    pilot3: ['Deniz Yılmaz', 'Ece Demir', 'Can Kaya'],
+    expand7: ['Selin Arslan', 'Emre Şahin', 'Derya Aydın', 'Mert Çelik', 'İpek Koç', 'Bora Aksoy', 'Zeynep Yıldız'],
+  };
+  if (!Object.hasOwn(profiles, profile)) throw new Error('Bilinmeyen veri profili.');
+  const people = profiles[profile].map(display_name => ({
     id: v7(), created_at: now, version: 1, org_id: orgId,
     display_name: `Demo ${display_name}`, given_name: null, family_name: null,
     state: 'active', merged_into_id: null,

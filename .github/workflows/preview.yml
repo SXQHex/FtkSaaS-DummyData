@@ -1,6 +1,13 @@
 name: Snaplet SQL preview
 on:
   workflow_dispatch:
+    inputs:
+      profile:
+        description: Veri profili
+        type: choice
+        options: [pilot3, expand7]
+        default: pilot3
+        required: true
 permissions:
   contents: read
 concurrency:
@@ -29,6 +36,7 @@ jobs:
         run: npm run preview
         env:
           SNAPLET_DATABASE_URL: ${{ secrets.SNAPLET_DATABASE_URL }}
+          SNAPLET_PROFILE: ${{ inputs.profile }}
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: snaplet-preview-${{ github.run_id }}
@@ -36,4 +44,4 @@ jobs:
           if-no-files-found: error
           retention-days: 3
       - name: Summarize
-        run: echo 'Preview only. 3 people + 3 contacts + 3 student relationships. No database writes. Download the SQL artifact for review.' >> "$GITHUB_STEP_SUMMARY"
+        run: echo 'Preview only. Counts and profile are in the manifest. No database writes. Download the SQL artifact for review.' >> "$GITHUB_STEP_SUMMARY"

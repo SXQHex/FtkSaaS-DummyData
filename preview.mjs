@@ -6,6 +6,7 @@ import { validateConnection, buildPlan, projectModel, tables, connectionFailure,
 
 async function main() {
   const testing = process.env.SNAPLET_LOCAL_TEST === '1';
+  const profile = process.env.SNAPLET_PROFILE || 'pilot3';
   const connectionString = validateConnection(process.env.SNAPLET_DATABASE_URL, testing);
   process.env.SNAPLET_DATABASE_URL = connectionString;
   const client = new pg.Client({ connectionString, ssl: databaseTls(testing), connectionTimeoutMillis: 10000 });
@@ -21,7 +22,7 @@ async function main() {
     const { org_id, center_id } = target.rows[0];
     const schema = await client.query("select table_name,column_name,data_type,is_nullable,column_default from information_schema.columns where table_schema='core' and table_name=any($1) order by table_name,ordinal_position", [tables]);
     schemaHash = createHash('sha256').update(JSON.stringify(schema.rows)).digest('hex');
-    plan = buildPlan(org_id, center_id);
+    plan = buildPlan(org_id, center_id, new Date().toISOString(), profile);
     for (const table of tables) {
       const columns = schema.rows.filter(c => c.table_name === table);
       if (!columns.length) throw new Error('Pilot tablosu eksik.');
@@ -64,7 +65,7 @@ async function main() {
   if (inserts.length !== 3 || inserts.some(m => m[1] !== 'core' || !tables.includes(m[2])) || /\b(TRUNCATE|DELETE|UPDATE|ALTER|DROP|CREATE)\b/i.test(sql)) throw new Error('Beklenen üç ekleme dışındaki SQL reddedildi.');
   const wrapped = `-- Snaplet dryRun; NOT executed. Review trigger and quota effects before loading.\nBEGIN;\n${sql}\nSET CONSTRAINTS ALL IMMEDIATE;\nROLLBACK;\n`;
   writeFileSync('output/preview.sql', wrapped);
-  writeFileSync('output/manifest.json', JSON.stringify({ mode: 'dryRun', database_written: false, schema_sha256: schemaHash, sql_sha256: createHash('sha256').update(wrapped).digest('hex'), rows: plan }, null, 2));
-  console.log('SQL önizlemesi hazır: 3 kişi, 3 iletişim, 3 öğrencilik. Veritabanına yazılmadı.');
+  writeFileSync('output/manifest.json', JSON.stringify({ mode: 'dryRun', profile, database_written: false, schema_sha256: schemaHash, sql_sha256: createHash('sha256').update(wrapped).digest('hex'), rows: plan }, null, 2));
+  console.log(`SQL önizlemesi hazır: ${plan.people.length} kişi, iletişim ve öğrencilik. Veritabanına yazılmadı.`);
 }
 main().catch(error => { console.error(error.message); process.exitCode = 1; });

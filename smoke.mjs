@@ -15,15 +15,17 @@ try {
     create table core.center_relationships(id uuid primary key,created_at timestamptz not null,version bigint not null,org_id uuid not null references core.organizations(id),center_id uuid not null references core.centers(id),person_id uuid not null references core.people(id),kind text not null,state text not null,started_at timestamptz not null,ended_at timestamptz);
     insert into core.organizations values('019a4d00-0000-7000-8000-000000000001','Starter1','active');
     insert into core.centers values('019a4d00-0000-7000-8000-000000000002','019a4d00-0000-7000-8000-000000000001','Starter1 Merkez','active');`);
-  const preview = spawnSync(process.execPath, ['preview.mjs'], { stdio: 'inherit', timeout: 180000 });
-  if (preview.status !== 0) throw new Error('Preview failed');
   const count = async () => (await client.query('select count(*)::int as n from core.people')).rows[0].n;
-  if (await count() !== 0) throw new Error('dryRun wrote rows');
-  const sql = readFileSync('output/preview.sql', 'utf8');
-  // Execute generated statements only against this fresh loopback database.
-  await client.query(sql.replace(/ROLLBACK;\s*$/, ''));
-  if (await count() !== 3) throw new Error('Wrong generated row count');
-  await client.query('ROLLBACK');
-  if (await count() !== 0) throw new Error('Rollback did not restore empty test tables');
+  for (const [profile, expected] of [['pilot3',3],['expand7',7]]) {
+    const preview = spawnSync(process.execPath, ['preview.mjs'], { env:{...process.env,SNAPLET_PROFILE:profile}, stdio: 'inherit', timeout: 180000 });
+    if (preview.status !== 0) throw new Error('Preview failed');
+    if (await count() !== 0) throw new Error('dryRun wrote rows');
+    const sql = readFileSync('output/preview.sql', 'utf8');
+    // Execute generated statements only against this fresh loopback database.
+    await client.query(sql.replace(/ROLLBACK;\s*$/, ''));
+    if (await count() !== expected) throw new Error('Wrong generated row count');
+    await client.query('ROLLBACK');
+    if (await count() !== 0) throw new Error('Rollback did not restore empty test tables');
+  }
   console.log('Native tool smoke passed: dryRun, valid SQL and rollback. This is not hosted business acceptance.');
 } finally { await client.end(); }

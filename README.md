@@ -7,7 +7,7 @@ FtkSaaS uygulama reposundan bağımsız Snaplet çalışma alanı. Uygulama kodu
 1. Settings → Secrets and variables → Actions → New repository secret:
    - Name: `SNAPLET_DATABASE_URL`
    - Secret: Supabase **Connect → Session pooler → URI** bağlantısı. `[YOUR-PASSWORD]` yerine DB parolası doldurulur. Parolanın URI özel karakterleri percent-encode edilir. Port **5432** olmalı.
-2. Actions → **Snaplet SQL preview** → Run workflow → main.
+2. Actions → **Snaplet SQL preview** → Run workflow → main. `pilot3` ilk üç öğrenci, `expand7` yedi farklı öğrenci üretir. Her çalıştırma yeni kimlikler üretir; tekrar yüklemeden önce manifest kontrol edilir.
 3. Başarılı koşunun `snaplet-preview-…` artifact'ını indir.
 
 Proje HTTPS URL'si ve publishable/service-role anahtarı PostgreSQL bağlantısı değildir. Secret oluşturmak DB parolasını sıfırlamayı gerektirmez. Mevcut parolayı bilmiyorsan sıfırlamanın diğer bağlantılara etkisini önce değerlendir.
@@ -17,7 +17,7 @@ Proje HTTPS URL'si ve publishable/service-role anahtarı PostgreSQL bağlantıs�
 - Yalnız hedef proje `gwyprhenabtpkbojephw` ve session/direct 5432 bağlantısını kabul eder.
 - Starter1 / Starter1 Merkez adlı tek aktif kapsamı salt okunur doğrular.
 - Snaplet 0.98.0 ile güncel şemayı okur. Yalnız üç hedef tablonun scalar kolonlarını içeren bir üretim projeksiyonu hazırlar; FK kolonlarının değerleri açık verilir. Böylece mevcut kuruluş/merkez satırları yeniden üretilmez ve döngüsel ebeveyn grafiği üretimi kilitlemez. Bu, veritabanı şemasını veya FK/trigger kontrollerini değiştirmez. AI servisi kullanılmaz.
-- 3 sentetik kişi, 3 örnek e-posta ve 3 aktif öğrenci ilişkisi için `dryRun` SQL üretir.
+- Seçilen profile göre 3 veya 7 sentetik kişi, örnek e-posta ve aktif öğrenci ilişkisi için `dryRun` SQL üretir.
 - Domain UUID'leri v7, sürümler 1, adresler `example.invalid`; mevcut kullanıcı verisi kopyalanmaz.
 - Veritabanı bağlantısı salt okunur, TLS sertifika doğrulaması açık kalır. Ham sağlayıcı hataları/logları yayımlanmaz.
 - Supabase kök CA sertifikası `certs/supabase-root.crt` içinde sabittir. Bu public sertifika hem ön bağlantıda hem Snaplet adapter'ında kullanılır; sunucu adı doğrulaması açıktır. Access token gerekmez.

@@ -51,3 +51,12 @@ test('local test mode cannot disable hosted TLS', () => {
   assert.throws(() => validateConnection('postgresql://postgres.gwyprhenabtpkbojephw:demo@aws-1-eu-central-1.pooler.supabase.com:5432/postgres', true));
   assert.equal(validateConnection('postgresql://postgres@127.0.0.1:5432/test', true), 'postgresql://postgres@127.0.0.1:5432/test');
 });
+test('expansion adds seven distinct demo students without reusing the first pilot names', () => {
+  const pilot = buildPlan('org','center');
+  const expanded = buildPlan('org','center', '2026-11-06T12:00:00Z', 'expand7');
+  assert.equal(expanded.people.length, 7);
+  assert.equal(expanded.person_contacts.length, 7);
+  assert.equal(expanded.center_relationships.length, 7);
+  assert.equal(new Set([...pilot.people,...expanded.people].map(p=>p.display_name)).size, 10);
+  assert.throws(() => buildPlan('org','center',undefined,'unknown'));
+});
