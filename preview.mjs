@@ -1,8 +1,8 @@
 import pg from 'pg';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { validateConnection, buildPlan, tables } from './lib.mjs';
+import { validateConnection, buildPlan, projectModel, tables } from './lib.mjs';
 
 async function main() {
   const testing = process.env.SNAPLET_LOCAL_TEST === '1';
@@ -41,13 +41,23 @@ async function main() {
   writeFileSync('.snaplet/config.json', JSON.stringify({ adapter: 'pg' }));
   writeFileSync('.work/plan.json', JSON.stringify(plan), { mode: 0o600 });
   const env = { ...process.env, OPENAI_API_KEY: '', GROQ_API_KEY: '', SNAPLET_SEED_CONFIG: `${process.cwd()}/seed.config.ts` };
-  const sync = spawnSync('./node_modules/.bin/snaplet-seed', ['sync', '--output', '.generated'], { env, encoding: 'utf8', timeout: 120000, maxBuffer: 10 * 1024 * 1024 });
+  const sync = spawnSync('./node_modules/.bin/snaplet-seed', ['introspect'], { env, encoding: 'utf8', timeout: 120000, maxBuffer: 10 * 1024 * 1024 });
   if (sync.status !== 0) {
     if (testing) console.error(sync.stdout, sync.stderr);
     throw new Error('Snaplet şema eşitlemesi başarısız; hosted ham çıktı yayımlanmadı.');
   }
+  const model = projectModel(JSON.parse(readFileSync('.snaplet/dataModel.json', 'utf8')));
+  writeFileSync('.snaplet/dataModel.json', JSON.stringify(model));
+  const codegen = spawnSync('./node_modules/.bin/snaplet-seed', ['generate', '--output', '.generated'], { env, encoding: 'utf8', timeout: 60000, maxBuffer: 10 * 1024 * 1024 });
+  if (codegen.status !== 0) {
+    if (testing) console.error(codegen.stdout, codegen.stderr);
+    throw new Error('Snaplet client üretimi başarısız.');
+  }
   const generated = spawnSync(process.execPath, ['seed-child.mjs'], { env, encoding: 'utf8', timeout: 60000, maxBuffer: 10 * 1024 * 1024 });
-  if (generated.status !== 0 || !generated.stdout.includes('INSERT INTO')) throw new Error('Snaplet SQL üretimi başarısız; ham çıktı yayımlanmadı.');
+  if (generated.status !== 0 || !generated.stdout.includes('INSERT INTO')) {
+    if (testing) console.error(generated.stdout, generated.stderr);
+    throw new Error('Snaplet SQL üretimi başarısız; hosted ham çıktı yayımlanmadı.');
+  }
   const sql = generated.stdout;
   const inserts = [...sql.matchAll(/INSERT INTO\s+"?([^".\s]+)"?\."?([^"\s(]+)"?/g)];
   if (inserts.length !== 3 || inserts.some(m => m[1] !== 'core' || !tables.includes(m[2])) || /\b(TRUNCATE|DELETE|UPDATE|ALTER|DROP|CREATE)\b/i.test(sql)) throw new Error('Beklenen üç ekleme dışındaki SQL reddedildi.');

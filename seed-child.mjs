@@ -11,7 +11,8 @@ try {
     await seed[table](plan[table]);
   }
   process.exit(0);
-} catch {
+} catch (error) {
+  if (process.env.SNAPLET_LOCAL_TEST === '1') console.error(error);
   console.error('SNAPLET_GENERATION_FAILED');
   process.exit(1);
 }

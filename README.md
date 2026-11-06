@@ -17,7 +17,7 @@ Proje HTTPS URL'si ve publishable/service-role anahtarı PostgreSQL bağlantıs�
 
 - Yalnız hedef proje `gwyprhenabtpkbojephw` ve session/direct 5432 bağlantısını kabul eder.
 - Starter1 / Starter1 Merkez adlı tek aktif kapsamı salt okunur doğrular.
-- Snaplet 0.98.0 ile güncel şemadan client üretir. AI servisi kullanılmaz.
+- Snaplet 0.98.0 ile güncel şemayı okur. Yalnız üç hedef tablonun scalar kolonlarını içeren bir üretim projeksiyonu hazırlar; FK kolonlarının değerleri açık verilir. Böylece mevcut kuruluş/merkez satırları yeniden üretilmez ve döngüsel ebeveyn grafiği üretimi kilitlemez. Bu, veritabanı şemasını veya FK/trigger kontrollerini değiştirmez. AI servisi kullanılmaz.
 - 3 sentetik kişi, 3 örnek e-posta ve 3 aktif öğrenci ilişkisi için `dryRun` SQL üretir.
 - Domain UUID'leri v7, sürümler 1, adresler `example.invalid`; mevcut kullanıcı verisi kopyalanmaz.
 - Veritabanı bağlantısı salt okunur, TLS sertifika doğrulaması açık kalır. Ham sağlayıcı hataları/logları yayımlanmaz.

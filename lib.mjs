@@ -3,6 +3,19 @@ import { v7 } from 'uuid';
 export const projectRef = 'gwyprhenabtpkbojephw';
 export const tables = ['people', 'person_contacts', 'center_relationships'];
 
+// This is an INSERT-only generation projection, not a replacement DB schema.
+// All IDs and FK columns are supplied explicitly; PostgreSQL retains its FKs.
+export function projectModel(raw) {
+  const models = {};
+  for (const table of tables) {
+    const match = Object.values(raw.models).filter(m => m.schemaName === 'core' && m.tableName === table);
+    if (match.length !== 1) throw new Error('Pilot modeli bulunamadı.');
+    const model = match[0];
+    models[table] = { ...model, fields: model.fields.filter(f => f.kind === 'scalar') };
+  }
+  return { ...raw, models };
+}
+
 export function validateConnection(value, test = false) {
   if (!value) throw new Error('SNAPLET_DATABASE_URL eksik.');
   let url;
